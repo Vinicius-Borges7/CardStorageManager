@@ -1,6 +1,6 @@
-import User from 'http://localhost/CardManager/Source/View/js/models/User.js';
-import Inputs from 'http://localhost/CardManager/Source/View/js/helpers/Inputs.js';
-import Field from 'http://localhost/CardManager/Source/View/js/helpers/Fields.js';
+import User from '../models/User.js';
+import Inputs from '../helpers/Inputs.js';
+import Field from '../helpers/Fields.js';
 
 document.querySelector('#btn').addEventListener('click', async () => {
     const inputs = Inputs.getInputs();

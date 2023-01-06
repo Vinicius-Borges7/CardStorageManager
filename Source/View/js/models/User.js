@@ -1,6 +1,4 @@
-import REST from "http://localhost/CardManager/Source/View/js/helpers/REST.js";
-import Inputs from 'http://localhost/CardManager/Source/View/js/helpers/Inputs.js';
-
+import REST from "../helpers/REST.js";
 export default class User{
     #name = null;
     #email = null;
@@ -28,7 +26,7 @@ export default class User{
             'email': this.#email
         }
 
-        const res = new REST(`http://localhost/CardManager/register`, body);
+        const res = new REST(`register`, body);
         return await res.post();
     }
 
@@ -38,7 +36,7 @@ export default class User{
             'pass': this.#pass 
         }
 
-        const res = new REST('http://localhost/CardManager/login', body);
+        const res = new REST('login', body);
         return await res.post();
     }
 
@@ -50,7 +48,7 @@ export default class User{
             'passc': this.#passc
         }
     
-        const res = new REST('http://localhost/cardManager/profile', body);   
+        const res = new REST('profile', body);   
         return await res.post();
     }
 }

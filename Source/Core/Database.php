@@ -1,7 +1,6 @@
 <?php
 
 namespace Source\Core;
-
 class Database {
     private const OPTIONS = [
         \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",

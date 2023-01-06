@@ -1,8 +1,8 @@
-import Magic from 'http://localhost/CardManager/Source/View/js/models/Magic.js';
-import Inputs from 'http://localhost/CardManager/Source/View/js/helpers/Inputs.js';
-import Field from 'http://localhost/CardManager/Source/View/js/helpers/Fields.js';
+import Magic from '../../models/Magic.js';
+import Inputs from '../../helpers/Inputs.js';
+import Field from '../../helpers/Fields.js';
 
-async function newMagic(){
+export default async function newMagic(){
     const inputs = Inputs.getInputs();
     
     if(Inputs.validatePkmInputs(inputs) == true){

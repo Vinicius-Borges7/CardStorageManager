@@ -1,12 +1,8 @@
-import Yugioh from 'http://localhost/CardManager/Source/View/js/models/Yugioh.js';
-import Inputs from 'http://localhost/CardManager/Source/View/js/helpers/Inputs.js';
-import Field from 'http://localhost/CardManager/Source/View/js/helpers/Fields.js';
+import Yugioh from '../../models/Yugioh.js';
+import Inputs from '../../helpers/Inputs.js';
+import Field from '../../helpers/Fields.js';
 
-// async function a(){
-//     window.alert("a")
-// }
-
-async function newYugioh(){
+export default async function newYugioh(){
     const inputs = Inputs.getInputs();
 
     if(Inputs.validateYgoInputs(inputs) == true){

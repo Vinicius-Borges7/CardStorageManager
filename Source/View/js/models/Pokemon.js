@@ -1,7 +1,5 @@
-import REST from "http://localhost/CardManager/Source/View/js/helpers/REST.js";
-import Inputs from 'http://localhost/CardManager/Source/View/js/helpers/Inputs.js';
-import Field from 'http://localhost/CardManager/Source/View/js/helpers/Fields.js';
-
+import REST from "../helpers/REST.js";
+import Field from '../helpers/Fields.js';
 export default class Yugioh{
     #name = null;
     #cardType = null;
@@ -44,13 +42,13 @@ export default class Yugioh{
             "owner": ""
         }
 
-        const res = new REST("http://localhost/cardManager/pkm", body);
+        const res = new REST("pkm", body);
         return await res.post();
     }
 
     static async get(){
         let field = Field.pokemon();
-        const req = new REST('http://localhost/CardManager/pkmGet', {'id': ''});
+        const req = new REST('pkmGet', {'id': ''});
         let cards = await req.post();
         console.log(cards);
 

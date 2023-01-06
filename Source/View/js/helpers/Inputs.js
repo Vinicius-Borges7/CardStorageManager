@@ -1,4 +1,4 @@
-import Field from "http://localhost/CardManager/Source/View/js/helpers/Fields.js";
+import Field from "../helpers/Fields";
 
 export default class Inputs{
     static getInputs(){
@@ -80,22 +80,24 @@ export default class Inputs{
     }
 
     static updateVerify(inputs){
-        let cont = [];
+        let cont = 0;
 
         if(inputs.name != ""){
-            cont.push('name');
+            cont += 1;
         }
 
         if(inputs.email == ""){
-            cont.push('email');
+            cont += 1;
         }
 
         if(inputs.pass == ""){
-            cont.push('password');
+            cont += 1;
         }
 
-        if(cont === []){
+        if(cont == 0){
             return false;
+        } else {
+            return true;
         }
     }
 

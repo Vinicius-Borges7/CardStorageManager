@@ -1,6 +1,6 @@
-import User from 'http://localhost/CardManager/Source/View/js/models/User.js';
-import Inputs from 'http://localhost/CardManager/Source/View/js/helpers/Inputs.js';
-import Field from 'http://localhost/CardManager/Source/View/js/helpers/Fields.js';
+import User from '../models/User.js';
+import Inputs from '../helpers/Inputs.js';
+import Field from '../helpers/Fields.js';
 
 document.getElementById("submitChanges").addEventListener('click', async () => {
     const inputs = Inputs.getUpdateInputs();
@@ -9,6 +9,8 @@ document.getElementById("submitChanges").addEventListener('click', async () => {
         const user = new User(inputs.name, inputs.email, inputs.pass, inputs.passc);
         
         const res = await user.update();
+
+        console.log(res);
 
         if(res == true){
             Field.response("responseFieldEmail").innerHTML = "";

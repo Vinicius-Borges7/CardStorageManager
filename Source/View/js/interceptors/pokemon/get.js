@@ -1,3 +1,3 @@
-import Pokemon from 'http://localhost/CardManager/Source/View/js/models/Pokemon.js';
+import Pokemon from '../../models/Pokemon';
 
 Pokemon.get();

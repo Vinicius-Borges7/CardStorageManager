@@ -1,8 +1,8 @@
-import Pokemon from 'http://localhost/CardManager/Source/View/js/models/Pokemon.js';
-import Inputs from 'http://localhost/CardManager/Source/View/js/helpers/Inputs.js';
-import Field from 'http://localhost/CardManager/Source/View/js/helpers/Fields.js';
+import Pokemon from '../../models/Pokemon.js';
+import Inputs from '../../helpers/Inputs';
+import Field from '../../helpers/Fields';
 
-async function newPokemon(){
+export default async function newPokemon(){
     const inputs = Inputs.getInputs();
 
     if(Inputs.validatePkmInputs(inputs) == true){

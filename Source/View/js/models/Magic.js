@@ -1,6 +1,5 @@
-import REST from "http://localhost/CardManager/Source/View/js/helpers/REST.js";
-import Inputs from 'http://localhost/CardManager/Source/View/js/helpers/Inputs.js';
-import Field from 'http://localhost/CardManager/Source/View/js/helpers/Fields.js';
+import REST from "../helpers/REST.js";
+import Field from '../helpers/Fields.js';
 
 export default class Magic{
     #name = null;
@@ -44,13 +43,13 @@ export default class Magic{
             "owner": ""
         }
 
-        const res = new REST("http://localhost/cardManager/mgc", body);
+        const res = new REST("mgc", body);
         return await res.post();
     }
 
     static async get(){
         let field = Field.magic();
-        const req = new REST('http://localhost/CardManager/mgcGet', {'id': ''});
+        const req = new REST('mgcGet', {'id': ''});
         let cards = await req.post();
         console.log(cards);
 

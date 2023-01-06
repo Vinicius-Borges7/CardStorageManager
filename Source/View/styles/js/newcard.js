@@ -1,3 +1,7 @@
+import newYugioh from "../../js/interceptors/yugioh/new.js";
+import newPokemon from "../../js/interceptors/pokemon/new.js";
+import newMagic from "../../js/interceptors/magic/new.js";
+
 document.querySelector(".inputBox").addEventListener('click', () => {
     let radio = {
         "ygo": document.querySelector("#ygo"),
@@ -22,10 +26,11 @@ document.querySelector(".inputBox").addEventListener('click', () => {
                     <input type="text" class="ygo ainput" placeholder="Cards's Rarity" id="rarity"/>
                     <input type="text" class="ygo ainput" placeholder="Price" id="price"/>
                     <h6 id="ygoResponseField">erro muito mais doque tri</h6>
-                    <button onClick="newYugioh()" id="btnYgo">Submit Card!</button>
+                    <button id="btnYgo">Submit Card!</button>
                 </div>
             </div>`   
-        )
+        );
+        document.querySelector("#btnYgo").addEventListener('click', newYugioh);
     }
 
     if(radio.mgc.checked){
@@ -46,10 +51,11 @@ document.querySelector(".inputBox").addEventListener('click', () => {
                     <input type="text" class="mgc ainput" placeholder="Cards's Rarity" id="rarity"/>
                     <input type="text" class="mgc ainput" placeholder="Card's Price" id="price"/>
                     <h6 id="mgcResponseField">erro muito tri</h6>
-                    <button onClick="newMagic()" id="btnMgc">Submit Card!</button>
+                    <button id="btnMgc">Submit Card!</button>
                 </div>
             </div>`
         );
+        document.querySelector("#btnMgc").addEventListener('click', newMagic);
     }
 
     if(radio.pkm.checked){
@@ -70,9 +76,10 @@ document.querySelector(".inputBox").addEventListener('click', () => {
                     <input type="text" class="pkm ainput" placeholder="Cards's Rarity" id="rarity"/>
                     <input type="text" class="pkm ainput" placeholder="Price" id="price"/>
                     <h6 id="pkmResponseField"></h6>
-                    <button id="btnPkm" onClick='newPokemon()'>Submit Card!</button>
+                    <button id="btnPkm">Submit Card!</button>
                 </div>
             </div>`
         );
+        document.querySelector("#btnPkm").addEventListener('click', newPokemon);
     }
 })

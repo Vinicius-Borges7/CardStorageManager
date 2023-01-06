@@ -41,12 +41,4 @@ $router->post("/ygo", "Api:ygoNew");
 $router->post("/ygoDel", "Api:ygoDel");
 $router->post("/ygoGet", "Api:ygoGet");
 
-// error pages
-$router->get("/error/404", "Error:e404");
-
 $router->dispatch();
-
-// Redirect all errors
-if ($router->error()) {
-    $router->redirect("/error/{$router->error()}");
-}

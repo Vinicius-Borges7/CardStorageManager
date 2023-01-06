@@ -8,7 +8,7 @@ async function post(url, body){
 }
 
 async function deleteMgc(id){
-    const res = await post('http://localhost/cardManager/mgcDel', {"id":`${id}`});
+    const res = await post('mgcDel', {"id":`${id}`});
 
     if(res){
       const mgc = document.querySelector(`#card${id}`);
