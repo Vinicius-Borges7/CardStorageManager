@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS cs;
+create database if not exists cs;
 USE cs;
 
 CREATE TABLE IF NOT EXISTS users(
@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS users(
 	name varchar(30) not null,
 	pass varchar(12) not null,
 	email varchar(30) not null,
+	type varchar(10) not null,
 	
 	primary key(id)
 );
@@ -18,11 +19,10 @@ create table if not exists itemPokemon(
 	extras varchar(30),	/* allies, fullart, etc */
 	quality varchar(12) not null,
 	rarity varchar(30),
-	price int(20),
+	price float4 not null,
 	owner int(30) not null,
 	
-	primary key(id),
-	foreign key(owner) references users(id)
+	primary key(id)
 );
 
 create table if not exists itemMagic(
@@ -33,23 +33,21 @@ create table if not exists itemMagic(
 	category varchar(30),
 	quality varchar(12) not null,
 	rarity varchar(30),
-	price int(20),
+	price float4 not null,
 	owner int(30) not null,
 	
-	primary key(id),
-	foreign key(owner) references users(id)
+	primary key(id)
 );
 
 create table if not exists itemYgo(
 	id int(15) NOT null AUTO_INCREMENT,
 	name varchar(30) not null,
-	cardType varchar(10) not null,	/* sincro, pendulum, xyz, spell, trap, etc */
-	cardCategory varchar(30),	/* dragon, spellcaster, machine, quick spell, etc */
+	cardType varchar(10) not null,	/* sincro, pendulum, xyz, etc */
+	cardCategory varchar(30),	/* dragon, speelcaster, machine, quick spell, etc */
 	quality varchar(12) not null,
 	rarity varchar(30),
-	price int(20),
+	price float4 not null,
 	owner int(30) not null,
 	
-	primary key(id),
-	foreign key(owner) references users(id)
+	primary key(id)
 );

@@ -1,4 +1,5 @@
-<?php namespace Source\Model;
+<?php 
+namespace Source\Model;
     class Ygo{
         private $id;
         private $name;
@@ -45,12 +46,12 @@
         }
 
         function insert(){
-            $query = 'INSERT INTO itemYgo VALUES (NULL,:name,:cardType,:cardType,:quality,:rarity,:price,:owner)';
+            $query = 'INSERT INTO itemYgo VALUES (NULL,:name,:cardCategory,:cardType,:quality,:rarity,:price,:owner)';
             $stmt = \Source\Core\Database::getinstance()->prepare($query);
 
             $stmt->bindParam(":name", $this->name);
             $stmt->bindParam(":cardType", $this->cardType);
-            $stmt->bindParam(":cardType", $this->cardCategory);
+            $stmt->bindParam(":cardCategory", $this->cardCategory);
             $stmt->bindParam(":quality", $this->quality);
             $stmt->bindParam(":rarity", $this->rarity);
             $stmt->bindParam(":price", $this->price);

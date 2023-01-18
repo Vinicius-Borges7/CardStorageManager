@@ -1,219 +1,35 @@
-import Field from "../helpers/Fields";
-
 export default class Inputs{
     static getInputs(){
         let inputs = {};
-    
-        document.querySelectorAll('input').forEach((e) => {
-            inputs[e.id] = e.value;
-        });
-        
-        if(this.voidCheck(inputs)){
-            return inputs;
-        }
-        return false;
-    }
-
-    static getUpdateInputs(){
-        let inputs = {};
-    
-        document.querySelectorAll('input').forEach((e) => {
-            inputs[e.id] = e.value;
-        });
-        
-        if(inputs.passc == "" || null || undefined){
-            return false;
-        }
+        document.querySelectorAll('input').forEach((e) => inputs[e.id] = e.value);
         return inputs;
-    }
-
-    static validateInputs(inputs){
-        let token = false;
-        if(this.voidCheck(inputs)){
-            if(this.pssConfirm(inputs)){
-                token = true;
-            } 
-        }
-        return token;
-    }
-
-    static validateYgoInputs(inputs){
-        let token = false;
-        if(this.ygoVoidCheck(inputs)){
-            if(this.pssConfirm(inputs)){
-                token = true;
-            } else {
-                token = "passwords dont check";
-            }
-        } else {
-            token = "all fields are necessary";
-        }
-        return token;
-    }
-
-    static validateMgcInputs(inputs){
-        let token = false;
-        if(this.mgcVoidCheck(inputs)){
-            if(this.pssConfirm(inputs)){
-                token = true;
-            } else {
-                token = "passwords dont check";
-            }
-        } else {
-            token = "all fields are necessary";
-        }
-        return token;
-    }
-
-    static validatePkmInputs(inputs){
-        let token = false;
-        if(this.pkmVoidCheck(inputs)){
-            if(this.pssConfirm(inputs)){
-                token = true;
-            } else {
-                token = "passwords dont check";
-            }
-        } else {
-            token = "all fields are necessary";
-        }
-        return token;
-    }
-
-    static updateVerify(inputs){
-        let cont = 0;
-
-        if(inputs.name != ""){
-            cont += 1;
-        }
-
-        if(inputs.email == ""){
-            cont += 1;
-        }
-
-        if(inputs.pass == ""){
-            cont += 1;
-        }
-
-        if(cont == 0){
-            return false;
-        } else {
-            return true;
-        }
     }
 
     static pssConfirm(inputs){
         if(inputs.pass !== inputs.passc){
-            Field.response("responseFieldSubmit").innerHTML = "Passwords dont check";
-            return false;
-        }
-        return true;
-    }
-
-    static ygoVoidCheck(inputs){
-        if(inputs.name == "" || null || undefined){
-            return false;
-        }
-    
-        if(inputs.cardType == "" || null || undefined){
-            return false;
-        }
-    
-        if(inputs.cardCategory == "" || null || undefined){
-            return false;
-        }
-    
-        if(inputs.quality == "" || null || undefined){
-            return false;
-        }
-
-        if(inputs.rarity == "" || null || undefined){
-            return false;
-        }
-
-        if(inputs.price == "" || null || undefined){
-            return false;
-        }
-        return true;
-    }
-
-    static mgcVoidCheck(inputs){
-        if(inputs.name == "" || null || undefined){
-            return false;
-        }
-    
-        if(inputs.cardType == "" || null || undefined){
-            return false;
-        }
-    
-        if(inputs.color == "" || null || undefined){
-            return false;
-        }
-
-        if(inputs.category == "" || null || undefined){
-            return false;
-        }
-    
-        if(inputs.quality == "" || null || undefined){
-            return false;
-        }
-
-        if(inputs.rarity == "" || null || undefined){
-            return false;
-        }
-
-        if(inputs.price == "" || null || undefined){
-            return false;
-        }
-        return true;
-    }
-
-    static pkmVoidCheck(inputs){
-        if(inputs.name == "" || null || undefined){
-            return false;
-        }
-    
-        if(inputs.cardType == "" || null || undefined){
-            return false;
-        }
-    
-        if(inputs.pokeType == "" || null || undefined){
-            return false;
-        }
-
-        if(inputs.extras == "" || null || undefined){
-            return false;
-        }
-    
-        if(inputs.quality == "" || null || undefined){
-            return false;
-        }
-
-        if(inputs.rarity == "" || null || undefined){
-            return false;
-        }
-
-        if(inputs.price == "" || null || undefined){
+            document.querySelector("#responseField").innerHTML = "Passwords dont check";
             return false;
         }
         return true;
     }
 
     static voidCheck(inputs){
-        if(inputs.name == "" || null || undefined){
-            return "todos campos são obrigatórios";
+        let token = true;
+        Object.values(inputs).forEach(e => {
+            if(e == ''){
+                token = false;
+            }
+        });
+        return token;
+    }
+
+    static updateVerify(){
+        let inputs = {};
+        document.querySelectorAll('input').forEach((e) => inputs[e.id] = e.value);
+        if(Object.values(inputs).filter(e => e).length > 1){
+            return true;
+        } else {
+            return false;
         }
-    
-        if(inputs.email == "" || null || undefined){
-            return "todos campos são obrigatórios";
-        }
-    
-        if(inputs.pass == "" || null || undefined){
-            return "todos campos são obrigatórios";
-        }
-    
-        if(inputs.passc == "" || null || undefined){
-            return "todos campos são obrigatórios";
-        }
-        return true;
     }
 }

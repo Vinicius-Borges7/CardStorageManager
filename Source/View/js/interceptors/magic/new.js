@@ -5,7 +5,7 @@ import Field from '../../helpers/Fields.js';
 export default async function newMagic(){
     const inputs = Inputs.getInputs();
     
-    if(Inputs.validatePkmInputs(inputs) == true){
+    if(Inputs.voidCheck(inputs) == true){
         const card = new Magic(
             inputs.name,
             inputs.cardType,
@@ -17,16 +17,12 @@ export default async function newMagic(){
             inputs.owner
             );
             
-            console.log(inputs);
-            console.log(card);
-            
             Field.response("mgcResponseField").innerHTML = "";
             const res = await card.new();
             
             Field.response("mgcResponseField").innerHTML = res;
-        } 
-        
-        else {
-            Field.response("mgcResponseField").innerHTML = Inputs.validateMgcInputs(inputs);
-        }
+    } else {
+        Field.response("mgcResponseField").innerHTML = "";
+        Field.response("mgcResponseField").innerHTML = "all fields are obrigatory";
+    }
 }

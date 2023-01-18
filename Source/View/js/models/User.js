@@ -1,4 +1,5 @@
 import REST from "../helpers/REST.js";
+
 export default class User{
     #name = null;
     #email = null;
@@ -37,6 +38,11 @@ export default class User{
         }
 
         const res = new REST('login', body);
+        return await res.post();
+    }
+
+    static async logout(){
+        const res = new REST('logout', {});
         return await res.post();
     }
 

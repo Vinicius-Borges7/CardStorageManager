@@ -25,7 +25,7 @@ document.querySelector(".inputBox").addEventListener('click', () => {
                     <input type="text" class="ygo ainput" placeholder="Card's Quality" id="quality"/>
                     <input type="text" class="ygo ainput" placeholder="Cards's Rarity" id="rarity"/>
                     <input type="text" class="ygo ainput" placeholder="Price" id="price"/>
-                    <h6 id="ygoResponseField">erro muito mais doque tri</h6>
+                    <h6 id="ygoResponseField"></h6>
                     <button id="btnYgo">Submit Card!</button>
                 </div>
             </div>`   
@@ -50,7 +50,7 @@ document.querySelector(".inputBox").addEventListener('click', () => {
                     <input type="text" class="mgc ainput" placeholder="Card's Quality" id="quality"/>
                     <input type="text" class="mgc ainput" placeholder="Cards's Rarity" id="rarity"/>
                     <input type="text" class="mgc ainput" placeholder="Card's Price" id="price"/>
-                    <h6 id="mgcResponseField">erro muito tri</h6>
+                    <h6 id="mgcResponseField"></h6>
                     <button id="btnMgc">Submit Card!</button>
                 </div>
             </div>`

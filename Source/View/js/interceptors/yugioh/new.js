@@ -5,7 +5,7 @@ import Field from '../../helpers/Fields.js';
 export default async function newYugioh(){
     const inputs = Inputs.getInputs();
 
-    if(Inputs.validateYgoInputs(inputs) == true){
+    if(Inputs.voidCheck(inputs) == true){
         const card = new Yugioh(
             inputs.name,
             inputs.cardType,
@@ -22,9 +22,8 @@ export default async function newYugioh(){
         const res = await card.new();
 
         Field.response("ygoResponseField").innerHTML = res;
-    } 
-    
-    else {
-        Field.response("ygoResponseField").innerHTML = Inputs.validateYgoInputs(inputs);
+    } else {
+        Field.response("ygoResponseField").innerHTML = "";
+        Field.response("ygoResponseField").innerHTML = "all fields are obrigatory";
     }
 }

@@ -1,4 +1,6 @@
-<?php namespace Source\Controller;
+<?php namespace Source\Controller; 
+
+session_start();
 
 class Api {
     public function a(){
@@ -60,7 +62,7 @@ class Api {
         $pass = strCleanner("pass", $user->getData('pass', 'id', $id));
 
         if(($pass == $_POST['pass']) && ($email == $_POST['email'])){
-            session_start();
+
             $_SESSION['user'] = (int)strCleanner("id", json_encode(($user->getData('id', 'email', $email))));
             echo json_encode(true);
             return;
@@ -68,8 +70,12 @@ class Api {
         echo json_encode(false);
     }
 
+    public function logout(){
+        $_SESSION['user'] = '';
+        echo json_encode(true);
+    }
+
     public function profile(){
-        session_start();
         function strCleanner($target, $string){
             if($target == 'id'){
                 $string = substr($string, 10);
@@ -97,8 +103,8 @@ class Api {
         }
 
         $user = new \Source\Model\User();
-        // $id = $_SESSION['user'];
-        $id = 10;
+        $id = $_SESSION['user'];
+        // $id = 10;
         $email = strCleanner("email", $user->getData('email', 'id', $id));
         $pass = strCleanner("pass", $user->getData('pass', 'id', $id));
         $counter = false;
@@ -135,13 +141,19 @@ class Api {
         }
     }
         
+    public function profileBarrier(){
+        if($_SESSION['user'] == ''){
+            echo json_encode(false);
+        } else {
+            echo json_encode(true);
+        }
+    }
         
         
         
     
 
     public function mgcNew(){
-        session_start();
         $card = new \Source\Model\Mgc(
             NULL,
             $_POST['name'],
@@ -170,11 +182,6 @@ class Api {
     }
 
     public function mgcGet(){
-        session_start();
-        if(!isset($_SESSION['user'])){
-            echo json_encode(false);
-            return;
-        }
         $card = new \Source\Model\Mgc(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
         $cards = $card->findAll($_SESSION['user']);
 
@@ -192,7 +199,6 @@ class Api {
 
 
     public function pkmNew(){
-        session_start();
         $card = new \Source\Model\Pkm(
             NULL,
             $_POST['name'],
@@ -221,11 +227,6 @@ class Api {
     }
 
     public function pkmGet(){
-        session_start();
-        if(!isset($_SESSION['user'])){
-            echo json_encode(false);
-            return;
-        }
         $card = new \Source\Model\Pkm(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
         $cards = $card->findAll($_SESSION['user']);
     
@@ -242,7 +243,6 @@ class Api {
 
 
     public function ygoNew(){
-        session_start();
         $card = new \Source\Model\Ygo(
             NULL,
             $_POST['name'],
@@ -269,11 +269,7 @@ class Api {
     }
 
     public function ygoGet(){
-        session_start();
-        if(!isset($_SESSION['user'])){
-            echo json_encode(false);
-            return;
-        }
+        $_SESSION['user'] = '';
 
         $card = new \Source\Model\Ygo(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
         $cards = $card->findAll($_SESSION['user']);

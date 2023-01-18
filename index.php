@@ -28,6 +28,8 @@ $router->get("/perfil", "Web:profile");
 $router->post("/login", "Api:login");
 $router->post("/register", "Api:register");
 $router->post("/profile", "Api:profile");
+$router->post("/logout", "Api:logout");
+$router->post("/profileBarrier", "Api:profileBarrier");
 
 $router->post("/mgc", "Api:mgcNew");
 $router->post("/mgcDel", "Api:mgcDel");

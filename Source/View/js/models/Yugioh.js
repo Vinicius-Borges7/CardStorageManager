@@ -1,5 +1,6 @@
 import REST from '../helpers/REST.js';
-import Field from '../helpers/Fields.js';
+import Field from "../helpers/Fields.js";
+
 export default class Yugioh{
     #name = null;
     #cardType = null;
