@@ -14,4 +14,8 @@ export default class Field{
     static pokemon(){
         return document.querySelector("#pkmCards");
     }
+
+    static bakugan(){
+        return document.querySelector("#bkgCards");
+    }
 }

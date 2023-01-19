@@ -4,18 +4,21 @@
         private $name;
         private $pass;
         public $email;
+        private $type;
 
         public function __construct(
             ?int $id = NULL,
             ?string $name = NULL,
             ?string $pass = NULL,
-            ?string $email = NULL
+            ?string $email = NULL,
+            ?string $type = NULL
         )
         {
             $this->id = NULL;
             $this->name = $name;
             $this->pass = $pass;
             $this->email = $email;
+            $this->type = $type;
         }
 
        function getData($target, $selector, $value){ 
@@ -38,12 +41,13 @@
         }
 
         function insert(){
-            $query = 'INSERT INTO users VALUES (NULL,:name,:pass,:email)';
+            $query = 'INSERT INTO users VALUES (NULL,:name,:pass,:email,:type)';
             $stmt = \Source\Core\Database::getinstance()->prepare($query);
 
             $stmt->bindParam(":name", $this->name);
             $stmt->bindParam(":pass", $this->pass);
             $stmt->bindParam(":email", $this->email);
+            $stmt->bindParam(":type", $this->type);
 
             $stmt->execute();
         }

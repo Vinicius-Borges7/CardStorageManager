@@ -43,4 +43,8 @@ $router->post("/ygo", "Api:ygoNew");
 $router->post("/ygoDel", "Api:ygoDel");
 $router->post("/ygoGet", "Api:ygoGet");
 
+$router->post("/bakugan", "Api:bakuganNew");
+$router->post("/bakuganDel", "Api:bakuganDel");
+$router->post("/bakuganGet", "Api:bakuganGet");
+
 $router->dispatch();

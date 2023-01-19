@@ -70,7 +70,7 @@ export default class Magic{
                             <p class="card-text">Card's Rarity: ${e.rarity}</p>
                             <p class="card-text">Card's Price: ${e.price}</p>
                         </div>
-                        <button id="btnDelMgc" onClick='deleteMgc(${e.id})' style="background-color: rgb(240, 194, 93);>Delete Card</button>
+                        <button id="btnDelMgc${e.id}" onClick='deleteMgc(${e.id})'>Delete Card</button>
                     </div>
                 </div>`
             );

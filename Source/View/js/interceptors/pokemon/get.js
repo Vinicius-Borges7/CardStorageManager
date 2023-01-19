@@ -1,3 +1,3 @@
-import Pokemon from '../../models/Pokemon';
+import Pokemon from '../../models/Pokemon.js';
 
 Pokemon.get();

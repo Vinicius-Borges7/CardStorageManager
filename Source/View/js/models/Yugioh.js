@@ -47,7 +47,7 @@ export default class Yugioh{
         let field = Field.yugioh();
         const req = new REST('ygoGet', {'id': ''});
         let cards = await req.post();
-        console.log(cards);
+        console.log("yugioh: " + cards);
 
         if(cards == false){
             cards = [];
@@ -65,7 +65,7 @@ export default class Yugioh{
                             <p class="card-text">Card's Rarity: ${e.rarity}</p>
                             <p class="card-text">Card's Price: ${e.price}</p>
                         </div>
-                        <button id="btnDelYgo" onClick='deleteYgo(${e.id})'>Delete Card</button>
+                        <button id="btnDelYgo${e.id}" onClick='deleteYgo(${e.id})'>Delete Card</button>
                     </div>
                 </div>`
             );

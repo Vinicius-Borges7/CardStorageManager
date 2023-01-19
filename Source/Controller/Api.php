@@ -14,7 +14,7 @@ class Api {
             return $string;
         }
 
-        $user = new \Source\Model\User(NULL, $_POST['name'], $_POST['pass'], $_POST['email']);
+        $user = new \Source\Model\User(NULL, $_POST['name'], $_POST['pass'], $_POST['email'], "client");
 
         if($user->getData('id', 'email', $_POST['email']) === "[]"){
             $user->insert();
@@ -241,7 +241,17 @@ class Api {
 
 
 
+    public function ygoGet(){  
+        $card = new \Source\Model\Ygo(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+        $cards = $card->findAll($_SESSION['user']);
 
+        if($cards == []){
+            echo json_encode(false);
+            return;
+        }
+        echo json_encode($cards);
+    }
+    
     public function ygoNew(){
         $card = new \Source\Model\Ygo(
             NULL,
@@ -268,10 +278,11 @@ class Api {
         }
     }
 
-    public function ygoGet(){
-        $_SESSION['user'] = '';
 
-        $card = new \Source\Model\Ygo(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+
+
+    public function bakuganGet(){  
+        $card = new \Source\Model\Bakugan();
         $cards = $card->findAll($_SESSION['user']);
 
         if($cards == []){
@@ -280,4 +291,36 @@ class Api {
         }
         echo json_encode($cards);
     }
+
+    public function bakuganNew(){
+        $card = new \Source\Model\Bakugan(
+            NULL,
+            $_POST['name'],
+            $_POST['cardType'],
+            $_POST['pyrus'],
+            $_POST['aquos'],
+            $_POST['ventus'],
+            $_POST['subterra'],
+            $_POST['haos'],
+            $_POST['darkus'],
+            $_POST['quality'],
+            $_POST['rarity'],
+            $_POST['price'],
+            $_SESSION['user']
+        );
+        $card->insert();
+        echo json_encode($_POST['name'] . " created sucessfuly");
+    }
+
+    public function bakuganDel(){
+        $card = new \Source\Model\Bakugan();
+
+        if($card->findCard($_POST['id']) == false){
+            echo json_encode(false);
+        } else {
+            $card->delete($_POST['id']);
+            echo json_encode(true);
+        }
+    }
+
 }
