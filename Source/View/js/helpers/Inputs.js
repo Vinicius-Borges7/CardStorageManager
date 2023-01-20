@@ -26,10 +26,11 @@ export default class Inputs{
     static updateVerify(){
         let inputs = {};
         document.querySelectorAll('input').forEach((e) => inputs[e.id] = e.value);
-        if(Object.values(inputs).filter(e => e).length > 1){
-            return true;
-        } else {
+        console.log(Object.values(inputs).filter(e => e).length)
+        if(Object.values(inputs).filter(e => e).length == 0){
             return false;
+        } else {
+            return true;
         }
     }
 }

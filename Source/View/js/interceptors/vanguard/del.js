@@ -7,7 +7,7 @@ async function post(url, body){
     return await res.json();
 }
 
-async function deleteVanguard(id){
+async function deleteVng(id){
     const res = await post('vanguardDel', {"id":`${id}`});
 
     if(res){

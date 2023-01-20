@@ -21,23 +21,59 @@
             $this->type = $type;
         }
 
-       function getData($target, $selector, $value){ 
-            $query = "SELECT $target FROM users WHERE $selector = '$value'";
+        function getId($value){ 
+            $query = "SELECT id FROM users WHERE email = :value";
             $stmt = \Source\Core\Database::getinstance()->prepare($query);
+            $stmt->bindParam(":value", $value);
             $stmt->execute();
 
-            $data = json_encode($stmt->fetchAll());
-            return $data;
+            $data = $stmt->fetchAll();
+            if($data){
+                return $data[0]->id;
+            } else {
+                return false;
+            }
+        }
 
-            // var_dump($data);
-            // return;
-            /*
-                returns a object
+        function getEmail($value){ 
+            $query = "SELECT email FROM users WHERE id = :value";
+            $stmt = \Source\Core\Database::getinstance()->prepare($query);
+            $stmt->bindParam(":value", $value);
+            $stmt->execute();
 
-                target => what you want to pick
-                selector => what you wll use to filter it(id or email)
-                value => the value of selector, like sampleEmail@email.com
-            */
+            $data = $stmt->fetchAll();
+            if($data){
+                return $data[0]->email;
+            } else {
+                return false;
+            }
+        }
+
+        function getName($value){ 
+            $query = "SELECT name FROM users WHERE id = :value";
+            $stmt = \Source\Core\Database::getinstance()->prepare($query);
+            $stmt->bindParam(":value", $value);
+            $stmt->execute();
+
+            if($data){
+                return $data[0]->name;
+            } else {
+                return false;
+            }
+        }
+
+        function getPass($value){ 
+            $query = "SELECT pass FROM users WHERE id = :value";
+            $stmt = \Source\Core\Database::getinstance()->prepare($query);
+            $stmt->bindParam(":value", $value);
+            $stmt->execute();
+
+            $data = $stmt->fetchAll();
+            if($data){
+                return $data[0]->pass;
+            } else {
+                return false;
+            }
         }
 
         function insert(){
@@ -67,13 +103,14 @@
         }
 
         function delete($email){
-            try {
-                $id = \models\user\User::getData('id', 'email', $email);
+            $id = \Source\Model\User::getId($email);
+
+            if(!$id == []){
                 $query = "DELETE FROM users WHERE id = $id";
                 $stmt = \Source\Core\Database::getinstance()->prepare($query);
                 $stmt->execute();
                 return true;
-            } catch (\Throwable $th) {
+            } else {
                 return false;
             }
         }

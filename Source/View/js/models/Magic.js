@@ -43,13 +43,13 @@ export default class Magic{
             "owner": ""
         }
 
-        const res = new REST("mgc", body);
+        const res = new REST("magic", body);
         return await res.post();
     }
 
     static async get(){
         let field = Field.magic();
-        const req = new REST('mgcGet', {'id': ''});
+        const req = new REST('magicGet', {'id': ''});
         let cards = await req.post();
         console.log(cards);
 

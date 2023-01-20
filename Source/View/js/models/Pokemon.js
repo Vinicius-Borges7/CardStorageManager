@@ -43,13 +43,13 @@ export default class Yugioh{
             "owner": ""
         }
 
-        const res = new REST("pkm", body);
+        const res = new REST("pokemon", body);
         return await res.post();
     }
 
     static async get(){
         let field = Field.pokemon();
-        const req = new REST('pkmGet', {'id': ''});
+        const req = new REST('pokemonGet', {'id': ''});
         let cards = await req.post();
         console.log(cards);
 

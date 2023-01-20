@@ -52,6 +52,25 @@ CREATE TABLE IF NOT EXISTS itemYugioh(
 	primary key(id)
 );
 
+
+CREATE TABLE IF NOT EXISTS itemBakugan(
+	id INT(15) NOT NULL AUTO_INCREMENT,
+	name VARCHAR(30) NOT NULL,
+	cardType VARCHAR(10) NOT NULL,
+	pyrus int(15),
+	aquos int(15),
+	ventus int(15),
+	subterra int(15),
+	haos int(15),
+	darkus int(15),
+	quality VARCHAR(12) NOT NULL,
+	rarity VARCHAR(30),
+	price float4 NOT NULL,
+	owner INT(30) NOT NULL,
+	
+	primary key(id)
+);
+
 CREATE TABLE IF NOT EXISTS itemVanguard(
 	id INT(15) NOT NULL AUTO_INCREMENT,
 	name VARCHAR(30) NOT NULL,

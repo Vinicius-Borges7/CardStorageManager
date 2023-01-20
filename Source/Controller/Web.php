@@ -26,4 +26,8 @@ class Web {
     public function profile() {
         $this->view->render('user', []);
     }
+
+    public function adm() {
+        $this->view->render('adm', []);
+    }
 }

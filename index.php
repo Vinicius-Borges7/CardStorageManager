@@ -22,6 +22,14 @@ $router->get("/cadastro", "Web:register");
 $router->get("/entrar", "Web:login");
 $router->get("/nova_carta", "Web:newCard");
 $router->get("/perfil", "Web:profile");
+$router->get("/adm", "Web:adm");
+
+//adm routes
+$router->post("/admRegister", "Adm:newUser");
+$router->post("/admUpdate", "Adm:updateUser");
+$router->post("/admPromove", "Adm:promoveUser");
+$router->post("/admDownmove", "Adm:downmoveUser");
+$router->post("/admDelete", "Adm:deleteUser");
 
 // api routes
 $router->post("/login", "Api:login");
@@ -49,5 +57,6 @@ $router->post("/bakuganGet", "Api:bakuganGet");
 $router->post("/vanguard", "Api:vanguardNew");
 $router->post("/vanguardDel", "Api:vanguardDel");
 $router->post("/vanguardGet", "Api:vanguardGet");
+
 
 $router->dispatch();

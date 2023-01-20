@@ -4,21 +4,21 @@ session_start();
 
 class Api {
     public function register() {
-        function strCleanner($string){
-            $string = substr($string, 7);
-            $string = substr($string, 0, -2);
-            return $string;
-        }
+        $user = new \Source\Model\User(
+            NULL,
+            $_POST['name'],
+            $_POST['pass'],
+            $_POST['email'],
+            "client"
+        );
 
-        $user = new \Source\Model\User(NULL, $_POST['name'], $_POST['pass'], $_POST['email'], "client");
-
-        if($user->getData('id', 'email', $_POST['email']) === "[]"){
+        if(!$user->getId($_POST['email'])){
             $user->insert();
             echo json_encode(true);
             return;
         }
 
-        if($user->getData('id', 'email', $_POST['email']) !== "[]"){
+        if($user->getId($_POST['email'])){
             echo json_encode(false);
             return;
         }
@@ -26,40 +26,13 @@ class Api {
     }
 
     public function login() {
-        function strCleanner($target, $string){
-            if($target == 'id'){
-                $string = substr($string, 10);
-                $string = substr($string, 0, -3);
-                return $string;
-            }
-
-            if($target == 'name'){
-                $string = substr($string, 14);
-                $string = substr($string, 0, -5);
-                return $string;
-            }
-            
-            if($target == 'email'){
-                $string = substr($string, 11);
-                $string = substr($string, 0, -3);
-                return $string;
-            }
-        
-            if($target == 'pass'){
-                $string = substr($string, 10);
-                $string = substr($string, 0, -3);
-                return $string;
-            }
-        }
-        
-        $user = new \Source\Model\User(NULL, NULL, NULL, NULL);
-        $id = strCleanner("id", json_encode($user->getData('id', 'email', $_POST['email'])));
-        $email = strCleanner("email", $user->getData('email', 'id', $id));
-        $pass = strCleanner("pass", $user->getData('pass', 'id', $id));
+        $user = new \Source\Model\User();
+        $id = $user->getId($_POST['email']);
+        $email = $user->getEmail($id);
+        $pass = $user->getPass($id);
 
         if(($pass == $_POST['pass']) && ($email == $_POST['email'])){
-
-            $_SESSION['user'] = (int)strCleanner("id", json_encode(($user->getData('id', 'email', $email))));
+            $_SESSION['user'] = $id;
             echo json_encode(true);
             return;
         }
@@ -72,68 +45,40 @@ class Api {
     }
 
     public function profile(){
-        function strCleanner($target, $string){
-            if($target == 'id'){
-                $string = substr($string, 10);
-                $string = substr($string, 0, -3);
-                return $string;
-            }
-
-            if($target == 'name'){
-                $string = substr($string, 14);
-                $string = substr($string, 0, -5);
-                return $string;
-            }
-            
-            if($target == 'email'){
-                $string = substr($string, 11);
-                $string = substr($string, 0, -3);
-                return $string;
-            }
-        
-            if($target == 'pass'){
-                $string = substr($string, 10);
-                $string = substr($string, 0, -3);
-                return $string;
-            }
-        }
-
         $user = new \Source\Model\User();
         $id = $_SESSION['user'];
-        // $id = 10;
-        $email = strCleanner("email", $user->getData('email', 'id', $id));
-        $pass = strCleanner("pass", $user->getData('pass', 'id', $id));
+        $email = $user->getEmail($id);
+        $pass = $user->getPass($id);
         $counter = false;
 
-
-        if($user->getData('id', 'email', $_POST['email']) == "[]"){
-            if($_POST['passc'] == $pass){
-                if($_POST['email'] != NULL){
+        if($_POST['passc'] == $pass){
+            if($_POST['email']){
+                if($user->getId($_POST['email']) == []){
                     $user->update($id, 'email', $_POST['email']);
                     $counter = 1;
-                }
-                
-                if($_POST['pass'] != NULL){
-                    $user->update($id, 'pass', $_POST['pass']);
-                    $counter = 2;
-                }
-                
-                if($_POST['name'] != NULL){
-                    $user->update($id, 'name', $_POST['name']);
-                    $counter = 3;
-                }
-
-                if($counter > 0){
-                    echo json_encode(true);
-                    return;
                 } else {
-                    echo json_encode(false);
+                    echo json_encode("email");
+                    return;
                 }
+            }
+            
+            if($_POST['pass']){
+                $user->update($id, 'pass', $_POST['pass']);
+                $counter = 2;
+            }
+            
+            if($_POST['name']){
+                $user->update($id, 'name', $_POST['name']);
+                $counter = 3;
+            }
+            if($counter > 0){
+                echo json_encode(true);
+                return;
             } else {
-                echo json_encode("senha");
+                echo json_encode(false);
             }
         } else {
-            echo json_encode("email");
+            echo json_encode("senha");
         }
     }
         
@@ -158,7 +103,7 @@ class Api {
             $user = $_SESSION['user'];
         }
 
-        $card = new \Source\Model\Mgc(
+        $card = new \Source\Model\Magic(
             NULL,
             $_POST['name'],
             $_POST['cardType'],
@@ -245,7 +190,7 @@ class Api {
     
     
     public function yugiohNew(){
-        $card = new \Source\Model\Ygo(
+        $card = new \Source\Model\Yugioh(
             NULL,
             $_POST['name'],
             $_POST['cardType'],
@@ -260,7 +205,7 @@ class Api {
     }
 
     public function yugiohGet(){  
-        $card = new \Source\Model\Ygo();
+        $card = new \Source\Model\Yugioh();
         $cards = $card->findAll($_SESSION['user']);
 
         if($cards == []){
@@ -272,7 +217,7 @@ class Api {
     
 
     public function yugiohDel(){
-        $card = new \Source\Model\Ygo();
+        $card = new \Source\Model\Yugioh();
 
         if($card->findCard($_POST['id']) == false){
             echo json_encode(false);
@@ -327,4 +272,42 @@ class Api {
         }
     }
 
+
+    public function vanguardNew(){
+        $card = new \Source\Model\Vanguard(
+            NULL,
+            $_POST['name'],
+            $_POST['cardType'],
+            $_POST['gauge'],
+            $_POST['quality'],
+            $_POST['rarity'],
+            $_POST['price'],
+            $_SESSION['user']
+        );
+        $card->insert();
+        echo json_encode($_POST['name'] . " created sucessfuly");
+    }
+
+    public function vanguardGet(){  
+        $card = new \Source\Model\Vanguard();
+        $cards = $card->findAll($_SESSION['user']);
+
+        if($cards == []){
+            echo json_encode(false);
+            return;
+        }
+        echo json_encode($cards);
+    }
+    
+
+    public function vanguardDel(){
+        $card = new \Source\Model\Vanguard();
+
+        if($card->findCard($_POST['id']) == false){
+            echo json_encode(false);
+        } else {
+            $card->delete($_POST['id']);
+            echo json_encode(true);
+        }
+    }
 }

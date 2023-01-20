@@ -8,7 +8,7 @@ async function post(url, body){
 }
 
 async function deletePkm(id){
-    const res = await post('pkmDel', {"id":`${id}`});
+    const res = await post('pokemonDel', {"id":`${id}`});
 
     if(res){
       const pkm = document.querySelector(`#card${id}`);

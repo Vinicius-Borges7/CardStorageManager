@@ -39,13 +39,13 @@ export default class Yugioh{
             "owner": ""
         }
 
-        const res = new REST("ygo", body);
+        const res = new REST("yugioh", body);
         return await res.post();
     }
 
     static async get(){
         let field = Field.yugioh();
-        const req = new REST('ygoGet', {'id': ''});
+        const req = new REST('yugiohGet', {'id': ''});
         let cards = await req.post();
         console.log("yugioh: " + cards);
 

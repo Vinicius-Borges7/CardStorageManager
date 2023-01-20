@@ -32,21 +32,21 @@ namespace Source\Model;
         }
 
         function findCard($id){
-            $query = "SELECT * FROM itemYgo WHERE id = $id;";
+            $query = "SELECT * FROM itemYugioh WHERE id = $id;";
             $stmt = \Source\Core\Database::getInstance()->prepare($query);
             $stmt->execute();
             return $stmt->fetch();
         }
 
         function findAll($owner){
-            $query = "SELECT * FROM itemYgo WHERE owner = $owner;";
+            $query = "SELECT * FROM itemYugioh WHERE owner = $owner;";
             $stmt = \Source\Core\Database::getInstance()->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll();
         }
 
         function insert(){
-            $query = 'INSERT INTO itemYgo VALUES (NULL,:name,:cardCategory,:cardType,:quality,:rarity,:price,:owner)';
+            $query = 'INSERT INTO itemYugioh VALUES (NULL,:name,:cardCategory,:cardType,:quality,:rarity,:price,:owner)';
             $stmt = \Source\Core\Database::getinstance()->prepare($query);
 
             $stmt->bindParam(":name", $this->name);
@@ -61,7 +61,7 @@ namespace Source\Model;
         }
 
         function update($id, $column, $newValue){
-            $query = "UPDATE itemYgo SET $column = :newValue WHERE id = :id";
+            $query = "UPDATE itemYugioh SET $column = :newValue WHERE id = :id";
             $stmt = \Source\Core\Database::getInstance()->prepare($query);
             $stmt->bindParam(":id", $id);
             $stmt->bindParam(":newValue", $newValue);
@@ -69,7 +69,7 @@ namespace Source\Model;
         }
 
         function delete($id){
-            $query = "DELETE FROM itemYgo WHERE id = $id";
+            $query = "DELETE FROM itemYugioh WHERE id = $id";
             $stmt = \Source\Core\Database::getInstance()->prepare($query);
             $stmt->execute();
 
