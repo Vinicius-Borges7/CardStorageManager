@@ -1,13 +1,1 @@
-in HTML:
-Yu-Gi-Oh! = ygo.
-Magic = mgc.
-Pokémon = pkm.
-Bakugan = bkg.
-Vanguard = vng.
-
-in PHP and JS:
-Yu-Gi-Oh! = Yugioh.
-Magic = Magic.
-Pokémon = Pokemon.
-Bakugan = Bakugan.
-Vanguard = Vanguard.
+my first real "finished" project did for school, is not that good
